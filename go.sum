@@ -1,0 +1,4 @@
+github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
+github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/xZenshin/DISYS_2 v0.0.0-20211001122157-e3d15f2bd218 h1:2sVwYXBuD3fSXIQXD9RD7wRZf9hV02R9jD8QsNQLNU0=
+github.com/xZenshin/DISYS_2 v0.0.0-20211001122157-e3d15f2bd218/go.mod h1:PIPuMnSxSI5yuuwDlfr9/fC8Ipe8tGh4UEAI895KhrI=

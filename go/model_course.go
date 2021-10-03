@@ -10,10 +10,9 @@
 package swagger
 
 type Course struct {
-
 	Name string `json:"name,omitempty"`
 
-	CourseID int32 `json:"courseID,omitempty"`
+	CourseID int `json:"courseID,omitempty"`
 
 	Workload int32 `json:"workload,omitempty"`
 

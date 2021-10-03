@@ -1,0 +1,280 @@
+swagger: "2.0"
+info:
+  title: ITU API
+  description: API for students, teachers and courses
+  version: 1.0.0
+tags:
+- name: "Student"
+- name: "Teacher"
+- name: "Course"
+paths:
+
+
+
+  /Student:
+    post:
+      tags:
+      - "Student"
+      summary: "Add a new Student"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Student object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "OK"
+  /Student/{id}:
+    get:
+      tags:
+      - "Student"
+      summary: "Get a student by student ID"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student object to be retrieved"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "OK"    
+          schema:
+           $ref: "#/definitions/Student"
+    put:
+      tags:
+      - "Student"
+      summary: "Update an existing Student"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Student object to update"
+          required: true
+          type: "integer"
+          format: "int32"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Student not found"
+        "405":
+          description: "Validation exception" 
+    delete:
+      tags:
+      - "Student"
+      summary: "Deletes a Student"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student to delete"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Student not found"       
+           
+
+
+
+  /Teacher:
+    post:
+      tags:
+      - "Teacher"
+      summary: "Add a new Teacher"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Teacher object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Teacher"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "OK"
+  /Teacher/{id}:
+      get:
+        tags:
+        - "Teacher"
+        summary: "Get a Teacher by teacher ID"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "Teacher object to be retrieved"
+          required: true
+          type: "integer"
+          format: "int32"
+        responses:
+          "405":
+            description: "Invalid input"
+          "200":
+            description: "OK"    
+            schema:
+             $ref: "#/definitions/Teacher"
+      put:
+        tags:
+        - "Teacher"
+        summary: "Update an existing Teacher"
+        parameters:
+          - name: "id"
+            in: "path"
+            description: "Teacher object to update"
+            required: true
+            type: "integer"
+            format: "int32"
+        responses:
+          "400":
+            description: "Invalid ID supplied"
+          "404":
+            description: "Teacher not found"
+          "405":
+            description: "Validation exception" 
+      delete:
+        tags:
+        - "Teacher"
+        summary: "Deletes a Teacher"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "Teacher to delete"
+          required: true
+          type: "integer"
+          format: "int32"
+        responses:
+          "400":
+            description: "Invalid ID supplied"
+          "404":
+            description: "Teacher not found"     
+
+       
+   
+   
+   
+  /Course: 
+     post:
+      tags:
+      - "Course"
+      summary: "Add a new course"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Course object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Course"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "OK"
+  /Course/{id}:
+    get:
+      tags:
+      - "Course"
+      summary: "Get a by Course ID"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Course object to be retrieved"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "OK"    
+          schema:
+           $ref: "#/definitions/Course"
+    put:
+      tags:
+      - "Course"
+      summary: "Update an existing Course"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Course object to update"
+          required: true
+          type: "integer"
+          format: "int32"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Course not found"
+        "405":
+          description: "Validation exception" 
+    delete:
+      tags:
+      - "Course"
+      summary: "Deletes a Course"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Course to delete"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Course not found"       
+           
+           
+
+
+definitions:
+  Student:
+    type: "object"
+    properties:
+      name: 
+        type: "string"
+      id:
+        type: "integer"
+        format: "int32"
+      course:
+        type: "object"
+        properties:
+          studentCourse:
+            $ref: "#/definitions/Course"
+  Course:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int32"
+      workload:
+        type: "integer"
+        format: "int32"
+      studentSatisfaction:
+        type: "integer"
+        format: "int32"
+  Teacher:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      popularity: 
+        type: "integer"
+        format: "int32"
+      id:
+        type: "integer"
+        format: "int32"
+      course:
+       type: "object"
+       properties:
+        teachingCourse:
+          $ref: "#/definitions/Course"

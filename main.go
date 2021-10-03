@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -32,12 +33,15 @@ func main() {
 	router.GET("/courses", getCourses)
 	router.POST("/course", postCourse)
 	router.GET("/course/:id", getCourse)
-	router.GET("/courseDel/:id", deleteCourse)
+	router.POST("/updateCourse", upDeleteCourse)
+	router.DELETE("/courseDel/:id", deleteCourse)
 
 	router.Run("localhost:8080")
 }
 
-var courses = []Course{}
+var courses = []Course{
+// {Name: "Benny", CourseID: 2, Workload: 1, StudentSatisfaction: 1},
+}
 
 func postCourse(c *gin.Context) {
 	var newCourse Course
@@ -78,3 +82,43 @@ func deleteCourse(c *gin.Context) {
 func RemoveIndex(s []Course, index int) []Course {
 	return append(s[:index], s[index+1:]...)
 }
+
+func upDeleteCourse(c *gin.Context){
+	var courseToDelete Course
+	if err := c.BindJSON(&courseToDelete); err != nil {
+		return
+	}
+	var index = 0
+	for _, a := range courses {
+
+		if a.CourseID == courseToDelete.CourseID {
+			courses = RemoveIndex(courses, index)
+			c.IndentedJSON(http.StatusOK, a)
+		}
+		index++
+	}
+
+	courses = append(courses, courseToDelete)
+	c.IndentedJSON(http.StatusCreated, courseToDelete)
+
+}
+
+func updateCourse(c *gin.Context) {
+	var updateCourse Course
+	if err := c.BindJSON(&updateCourse); err != nil {
+		return
+	}
+	
+	for _, a := range courses {
+		if updateCourse.CourseID == a.CourseID {
+			p := &a
+			p.Name = updateCourse.Name
+			fmt.Println(a.Name)
+			p.StudentSatisfaction = updateCourse.StudentSatisfaction
+			p.Workload = updateCourse.Workload
+			c.IndentedJSON(http.StatusOK, a)
+		}
+	}
+
+	
+  }
